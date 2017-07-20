@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# This script will execute a Hive SQL to load some file for the raw table into the Parquet table
+#
+
+# Log Location
+LOG_LOCATION=<log_path>
+NOW=$(date +"%F_%H_%M_%S")
+FILE="${LOG_LOCATION}/<file_path>_${NOW}.log"
+
+echo "SomeInfo: $(date)" > $FILE
+
+impala-shell -k --ssl -i <host> -f <file_location> | tee -a "$FILE"
+
+
+echo "Some Info: $(date)" >> $FILE
